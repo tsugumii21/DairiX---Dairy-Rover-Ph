@@ -99,8 +99,6 @@ aemyy-project/
 
 ## 👥 Lead Developer
 
-**BSIT - Filipino Innovation**
-
 - **Developer:** [Allen P. Del Valle](https://github.com/tsugumii21)
 
 ---
