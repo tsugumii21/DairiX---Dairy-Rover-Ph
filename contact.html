@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Contact DairiX - Reach out for support, orders, or partnerships." />
+    <title>Contact | DairiX</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .contact-page {
+        min-height: 100vh;
+        padding-top: 150px;
+        padding-bottom: 100px;
+        background-color: #000;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Subtle Atmospheric Lighting */
+      .contact-page::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle at 50% -10%,
+          rgba(62, 106, 225, 0.1) 0%,
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+
+      .contact-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 40px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .contact-header {
+        text-align: center;
+        margin-bottom: 80px;
+      }
+
+      .contact-header h1 {
+        font-size: 3rem;
+        font-weight: 600;
+        letter-spacing: -1.5px;
+        margin-bottom: 15px;
+      }
+
+      .contact-header p {
+        color: #8e8e93;
+        font-size: 1.1rem;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        margin-top: 60px;
+      }
+
+      .contact-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 40px;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        min-height: 220px;
+      }
+
+      .contact-card:hover {
+        background: rgba(255, 255, 255, 0.04);
+        transform: translateY(-5px);
+        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .contact-card h3 {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--accent-color, #3e6ae1);
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+
+      .contact-card .email-link {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #fff;
+        text-decoration: none;
+        word-break: break-all;
+        margin-bottom: 20px;
+        transition: color 0.3s;
+      }
+
+      .contact-card .email-link:hover {
+        color: var(--accent-color, #3e6ae1);
+      }
+
+      .contact-card p {
+        font-size: 0.85rem;
+        color: #8e8e93;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      /* Navigation Sync */
+      .header {
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      @media (max-width: 850px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+        .contact-header h1 { font-size: 2.2rem; }
+        .contact-container { padding: 0 20px; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <img src="images/logo.png" alt="DairiX Logo" />
+        </a>
+        <div class="nav-right">
+          <a href="index.html" class="nav-link desktop-only">Home</a>
+          <a href="about.html" class="nav-link desktop-only">About Us</a>
+          <a href="order.html" class="nav-link desktop-only">Order</a>
+          <a href="login.html" class="nav-link desktop-only">Sign In</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="contact-page">
+      <div class="contact-container">
+        <div class="contact-header">
+          <h1>Contact Us</h1>
+          <p>We're here to help you redefine community retail.</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Official Inquiry -->
+          <div class="contact-card">
+            <h3>Official Inquiry</h3>
+            <a href="mailto:dairyrover.ph@gmail.com" class="email-link">dairyrover.ph@gmail.com</a>
+            <p>General questions regarding Dairy Rover Manufacturing and the DairiX platform.</p>
+          </div>
+
+          <!-- Order Support -->
+          <div class="contact-card">
+            <h3>Fleet Orders</h3>
+            <a href="mailto:orders@dairyrover.com" class="email-link">orders@dairyrover.com</a>
+            <p>For questions regarding existing fleet orders or new deployment configurations.</p>
+          </div>
+
+          <!-- Partnerships -->
+          <div class="contact-card">
+            <h3>Partnerships</h3>
+            <a href="mailto:partners@dairyrover.com" class="email-link">partners@dairyrover.com</a>
+            <p>Inquiries for dairy companies interested in utilizing our autonomous vending platform.</p>
+          </div>
+
+          <!-- Customer Service -->
+          <div class="contact-card">
+            <h3>Customer Care</h3>
+            <a href="mailto:dairyrovercare@gmail.com" class="email-link">dairyrovercare@gmail.com</a>
+            <p>Direct support for end-users regarding purchase issues or unit feedback.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-links">
+          <a href="index.html">DairiX © 2025</a>
+          <a href="privacy.html">Privacy & Legal</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
+

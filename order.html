@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="DairiX Fleet Order - Autonomous Dairy Distribution Contract" />
+    <title>Contract Service | DairiX</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .order-page {
+        min-height: 100vh;
+        padding-top: 120px;
+        background-color: #000; /* Back to dark theme */
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Subtle Atmospheric Lighting */
+      .order-page::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle at 50% -10%,
+          rgba(62, 106, 225, 0.15) 0%,
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+
+      .order-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px;
+        width: 100%;
+        align-items: start; /* Align to top */
+        z-index: 1;
+      }
+
+      /* Left Side: Product Visual */
+      .product-visual {
+        position: sticky;
+        top: 150px; /* Keep visible on scroll */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .product-visual img {
+        width: 100%;
+        max-width: 600px;
+        filter: drop-shadow(0 0 50px rgba(62, 106, 225, 0.15));
+        animation: fadeInImage 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @keyframes fadeInImage {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
+      /* Right Side: Contract Info */
+      .contract-details {
+        text-align: left;
+        opacity: 0;
+        transform: translateX(20px);
+        animation: revealDetails 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+      }
+
+      @keyframes revealDetails {
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      .contract-details h1 {
+        font-size: 2.8rem;
+        font-weight: 600;
+        margin-bottom: 25px;
+        letter-spacing: -1.5px;
+        color: #fff;
+      }
+
+      .spec-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 40px;
+      }
+
+      .spec-list li {
+        margin-bottom: 15px;
+        font-size: 1rem;
+        color: #8e8e93;
+        display: flex;
+        align-items: baseline;
+      }
+
+      .spec-list strong {
+        font-weight: 600;
+        color: #fff;
+        margin-right: 10px;
+        min-width: 80px;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+      }
+
+      .payment-method-box {
+        margin-bottom: 35px;
+      }
+
+      .payment-label {
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+        color: #8e8e93;
+      }
+
+      .contract-btn-group {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 30px;
+      }
+
+      .btn-review {
+        flex: 1;
+        padding: 14px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: #fff;
+      }
+
+      .btn-review:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .btn-initiate {
+        width: 100%;
+        padding: 20px;
+        background: #fff;
+        color: #000;
+        border: none;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        margin-bottom: 25px;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .btn-initiate:hover {
+        background: #f0f0f0;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+      }
+
+      .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 40px;
+      }
+
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 13px;
+        color: #8e8e93;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .checkbox-item:hover {
+        color: #fff;
+      }
+
+      .checkbox-item input {
+        width: 18px;
+        height: 18px;
+        accent-color: #fff;
+        cursor: pointer;
+      }
+
+      .checkbox-item a {
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      /* Progress Bar */
+      .progress-container {
+        margin-top: 30px;
+        padding: 25px;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .progress-bar-bg {
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+
+      .progress-bar-fill {
+        width: 25%;
+        height: 100%;
+        background: #fff;
+        transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+      }
+
+      .progress-text {
+        font-size: 11px;
+        color: #8e8e93;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .progress-text strong {
+        color: #fff;
+        margin-right: 5px;
+      }
+
+      @media (max-width: 1000px) {
+        .order-container {
+          grid-template-columns: 1fr;
+          padding: 20px;
+          gap: 40px;
+        }
+        .contract-details h1 { font-size: 2.2rem; }
+        .product-visual img { max-width: 100%; }
+      }
+
+      /* Modal Styling */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .modal-overlay.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .modal-content {
+        background: #111;
+        width: 90%;
+        max-width: 600px;
+        max-height: 80vh;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 40px;
+        position: relative;
+        overflow-y: auto;
+        transform: translateY(20px);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .modal-overlay.active .modal-content {
+        transform: translateY(0);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: #8e8e93;
+        font-size: 24px;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .modal-close:hover {
+        color: #fff;
+      }
+
+      .modal-content h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        letter-spacing: -0.5px;
+      }
+
+      .modal-body {
+        color: #8e8e93;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .modal-body h3 {
+        color: #fff;
+        font-size: 1.1rem;
+        margin: 25px 0 10px;
+      }
+
+      .modal-body ul {
+        padding-left: 20px;
+        margin-bottom: 20px;
+      }
+
+      .modal-body li {
+        margin-bottom: 10px;
+      }
+
+      /* Deployment Form Refinement */
+      .deployment-form {
+        margin-bottom: 40px;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 40px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .deployment-form h3 {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #fff;
+        margin-bottom: 30px;
+        font-weight: 600;
+        opacity: 0.9;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .deployment-form h3::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .deployment-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+      }
+
+      .field-wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .field-wrapper.full {
+        grid-column: span 2;
+      }
+
+      .field-wrapper label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #8e8e93;
+        font-weight: 600;
+      }
+
+      .field-wrapper input,
+      .field-wrapper select {
+        width: 100%;
+        padding: 14px 16px;
+        background: #0a0a0a;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: #fff;
+        font-family: inherit;
+        font-size: 14px;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .field-wrapper input:focus,
+      .field-wrapper select:focus {
+        outline: none;
+        border-color: #fff;
+        background: #111;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 255, 255, 0.05);
+      }
+
+      .field-wrapper select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: calc(100% - 15px) center;
+        cursor: pointer;
+      }
+
+      /* Navigation Overrides */
+      .header {
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .nav-active {
+        border-bottom: 2px solid #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <img src="images/logo.png" alt="DairiX Logo" />
+        </a>
+        <div class="nav-right">
+          <a href="index.html" class="nav-link desktop-only">Home</a>
+          <a href="about.html" class="nav-link desktop-only">About Us</a>
+          <a href="order.html" class="nav-link desktop-only nav-active">Order</a>
+          <a href="login.html" class="nav-link desktop-only">Sign In</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="order-page">
+      <div class="order-container">
+        <!-- Left Side: Product Visual -->
+        <div class="product-visual">
+          <img src="images/rover homepage.png" alt="DairiX Autonomous Vehicle">
+        </div>
+
+        <!-- Right Side: Contract Info -->
+        <div class="contract-details">
+          <h1>Autonomous Dairy Distribution Vehicle</h1>
+          
+          <!-- Deployment Configuration -->
+          <div class="deployment-form">
+            <h3>Deployment Configuration</h3>
+            <div class="deployment-grid">
+              <div class="field-wrapper">
+                <label for="buyerName">Full Name</label>
+                <input type="text" id="buyerName" placeholder="Juan Dela Cruz">
+              </div>
+              <div class="field-wrapper">
+                <label for="companyName">Organization</label>
+                <input type="text" id="companyName" placeholder="DairiX Solutions Inc.">
+              </div>
+              <div class="field-wrapper full">
+                <label for="deploymentAddress">Target Deployment Address</label>
+                <input type="text" id="deploymentAddress" placeholder="123 Innovation St, BGC, Taguig">
+              </div>
+              <div class="field-wrapper full">
+                <label for="unitQuantity">Fleet Selection</label>
+                <select id="unitQuantity">
+                  <option value="" disabled selected>Select Fleet Size</option>
+                  <option value="1">Single Unit (Pilot Program)</option>
+                  <option value="3">Starter Fleet (3 Autonomous Units)</option>
+                  <option value="5">Expansion Fleet (5 Autonomous Units)</option>
+                  <option value="10">Enterprise Fleet (10+ Custom Deployment)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <ul class="spec-list">
+            <li><strong>Model:</strong> DairiX Unit 01 (Autonomous AI Vending)</li>
+            <li><strong>Capacity:</strong> 200+ product units with deep freeze</li>
+            <li><strong>Sensors:</strong> 360° LiDAR, Ultrasonic fusion, GPS Path Planning</li>
+            <li><strong>Power:</strong> 12hr continuous Lithium-ion with Solar Charging</li>
+            <li><strong>Features:</strong> Touchscreen ordering, cashless (GCash/Maya) & cash support</li>
+          </ul>
+
+          <div class="payment-method-box">
+            <span class="payment-label">Payment Method: Contract Agreement</span>
+            <div class="contract-btn-group">
+              <button class="btn-review" id="leaseBtn">Review Lease Agreement</button>
+              <button class="btn-review" id="purchaseBtn">Review Purchase Contract</button>
+            </div>
+          </div>
+
+          <button class="btn-initiate" id="initiateBtn">Initiate Contract Signing</button>
+
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" id="termsCheck">
+              <span>I agree to <a href="javascript:void(0)" id="termsLink">Terms & Conditions</a></span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="serviceCheck">
+              <span>I agree to <a href="javascript:void(0)" id="serviceLink">Service Agreement</a></span>
+            </label>
+          </div>
+
+          <div class="progress-container">
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progressFill"></div>
+            </div>
+            <p class="progress-text"><strong>Contract Stage:</strong> <span id="stageText">Reviewing Documents</span></p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="leaseModal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2 style="text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">Master Lease & Service Agreement</h2>
+        <div class="modal-body">
+          <p style="font-style: italic; margin-bottom: 30px; border-left: 2px solid var(--accent-color); padding-left: 15px;">This agreement ("Agreement") is entered into by and between DairiX Manufacturing ("Lessor") and the contracting entity ("Lessee").</p>
+          
+          <h3>Article I: Grant of Lease</h3>
+          <p>Lessor hereby leases to Lessee the DairiX Autonomous Distribution Unit(s) specified in the Order Summary. This lease includes the physical hardware, onboard sensor suite, and a non-exclusive license to the DairiX Navigation Software.</p>
+          
+          <h3>Article II: Geofencing & Operational Limits</h3>
+          <p>The Units are programmed with strict geofencing protocols. Operations are restricted to the Target Deployment Zone specified at the time of configuration. Relocation beyond established GPS boundaries without written authorization constitutes a breach of contract and will trigger automated unit lockdown.</p>
+          
+          <h3>Article III: Autonomous Support & Maintenance</h3>
+          <ul>
+            <li><strong>Lessor Obligations:</strong> DairiX provides 24/7 remote situational awareness monitoring, over-the-air (OTA) software updates, and scheduled preventive maintenance on drive motors and refrigeration systems.</li>
+            <li><strong>Technical SLA:</strong> Maintenance teams will respond to critical hardware failures within 4 hours of remote diagnostic confirmation.</li>
+          </ul>
+          
+          <h3>Article IV: Lessee Responsibilities</h3>
+          <p>Lessee is responsible for the daily replenishment of dairy products, maintaining hygiene standards in the vending slot, and providing a secured charging docking station at the base of operations.</p>
+          
+          <h3>Article V: Liability & Indemnification</h3>
+          <p>Lessor maintains primary liability insurance for autonomous navigation incidents. Lessee is responsible for liabilities arising from product quality (post-replenishment) and unauthorized physical tampering with the unit.</p>
+          
+          <h3>Article VI: Payment & Termination</h3>
+          <p>Service fees are billed monthly in advance. Lessor reserves the right to terminate service and remotely reclaim units upon 30 days of consecutive non-payment.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="purchaseModal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2 style="text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">DairiX Asset Purchase Agreement</h2>
+        <div class="modal-body">
+          <p style="font-style: italic; margin-bottom: 30px; border-left: 2px solid var(--accent-color); padding-left: 15px;">This Asset Purchase Agreement ("Agreement") defines the terms for the full acquisition of DairiX hardware systems by the Buyer.</p>
+          
+          <h3>Article I: Asset Transfer</h3>
+          <p>Upon final settlement of the purchase price, DairiX Manufacturing ("Seller") transfers full legal title and ownership of the specified Autonomous Unit(s) to the Buyer. This includes all mechanical, electrical, and structural components.</p>
+          
+          <h3>Article II: Software Licensing</h3>
+          <p>While the hardware is purchased outright, the DairiX Autonomous Operating System (DAOS) is provided under a perpetual, non-transferable license. Buyer is prohibited from reverse-engineering or modifying the core navigation stack.</p>
+          
+          <h3>Article III: Warranty & hardware Support</h3>
+          <ul>
+            <li><strong>Drive Train:</strong> 3-year comprehensive warranty on motors, transmission, and LiDAR sensor suite.</li>
+            <li><strong>Power System:</strong> 5-year warranty on the high-capacity Lithium-ion battery pack (maintaining at least 80% health).</li>
+            <li><strong>Structure:</strong> Lifetime warranty against fiberglass corrosion or structural frame failure under normal operating conditions.</li>
+          </ul>
+          
+          <h3>Article IV: Post-Purchase Compliance</h3>
+          <p>Buyer agrees to maintain the hardware in accordance with Seller's technical manual to ensure public safety. Failure to install critical safety-related firmware updates may void the warranty and navigation license.</p>
+          
+          <h3>Article V: Confidentiality</h3>
+          <p>The technical specifications, sensor fusion logic, and internal cooling designs are considered Trade Secrets. Buyer shall not disclose technical architecture to third-party competitors.</p>
+          
+          <h3>Article VI: Delivery & Acceptance</h3>
+          <p>Seller shall deliver the unit to the specified deployment site. Ownership risk transfers upon Buyer's physical acceptance and successful field-readiness test.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="termsModal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2 style="text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">Terms & Conditions</h2>
+        <div class="modal-body">
+          <p>These Terms & Conditions govern your use of the DairiX platform and services provided by DairiX Manufacturing.</p>
+          
+          <h3>1. Acceptance of Terms</h3>
+          <p>By initiating a contract or using our services, you agree to be bound by these terms. If you do not agree, please do not use our services.</p>
+          
+          <h3>2. User Responsibilities</h3>
+          <p>Users are responsible for providing accurate information and maintaining the security of their account credentials. Any unauthorized use of the unit or platform is strictly prohibited.</p>
+          
+          <h3>3. Intellectual Property</h3>
+          <p>All content, branding, and proprietary technology associated with DairiX are the exclusive property of DairiX Manufacturing.</p>
+          
+          <h3>4. Limitation of Liability</h3>
+          <p>DairiX shall not be liable for any indirect, incidental, or consequential damages arising from the use or inability to use our autonomous distribution systems.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="serviceModal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2 style="text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">Service Agreement</h2>
+        <div class="modal-body">
+          <p>This Service Agreement defines the operational support provided for DairiX Autonomous Units.</p>
+          
+          <h3>1. Scope of Service</h3>
+          <p>Service includes remote monitoring, autonomous navigation support, and technical maintenance as defined in the technical manual.</p>
+          
+          <h3>2. Maintenance Schedule</h3>
+          <p>Regular preventive maintenance will be performed every 3,000 operational hours or 6 months, whichever comes first.</p>
+          
+          <h3>3. Connectivity Requirements</h3>
+          <p>The unit requires a persistent 4G/LTE or Wi-Fi connection for autonomous operation and real-time sales reporting. DairiX is not responsible for service interruptions caused by local network failures.</p>
+          
+          <h3>4. Customer Support</h3>
+          <p>Technical support is available 24/7 via the central dashboard or designated emergency contact channels.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Modal (Custom Alert) -->
+    <div class="modal-overlay" id="notificationModal">
+      <div class="modal-content" style="max-width: 350px; text-align: center; padding: 40px 30px;">
+        <h2 id="notifTitle" style="text-transform: uppercase; letter-spacing: 2px; font-size: 1.1rem; margin-bottom: 10px;">Warning</h2>
+        <p id="notifMessage" style="color: #8e8e93; font-size: 0.85rem; line-height: 1.5; margin-bottom: 25px;"></p>
+        <button class="btn-initiate" id="notifClose" style="margin-bottom: 0; width: 100%; padding: 14px; font-size: 11px;">Close</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-links">
+          <a href="index.html">DairiX © 2025</a>
+          <a href="privacy.html">Privacy & Legal</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+      const initiateBtn = document.getElementById('initiateBtn');
+      const progressFill = document.getElementById('progressFill');
+      const stageText = document.getElementById('stageText');
+      const termsCheck = document.getElementById('termsCheck');
+      const serviceCheck = document.getElementById('serviceCheck');
+
+      // Modal Logic
+      const leaseBtn = document.getElementById('leaseBtn');
+      const purchaseBtn = document.getElementById('purchaseBtn');
+      const termsLink = document.getElementById('termsLink');
+      const serviceLink = document.getElementById('serviceLink');
+      
+      const leaseModal = document.getElementById('leaseModal');
+      const purchaseModal = document.getElementById('purchaseModal');
+      const termsModal = document.getElementById('termsModal');
+      const serviceModal = document.getElementById('serviceModal');
+      
+      const notificationModal = document.getElementById('notificationModal');
+      const notifTitle = document.getElementById('notifTitle');
+      const notifMessage = document.getElementById('notifMessage');
+      const notifClose = document.getElementById('notifClose');
+      
+      const closeBtns = document.querySelectorAll('.modal-close');
+
+      function openModal(modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scroll
+      }
+
+      function closeModal() {
+        document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+        document.body.style.overflow = 'auto';
+      }
+
+      function showNotification(title, message, isSuccess = false) {
+        notifTitle.innerText = title;
+        notifMessage.innerText = message;
+        notifTitle.style.color = isSuccess ? '#28a745' : '#ff4d4d';
+        notifClose.innerText = isSuccess ? 'Return to Home' : 'Understood';
+        
+        if (isSuccess) {
+          notifClose.onclick = () => window.location.href = 'index.html';
+        } else {
+          notifClose.onclick = closeModal;
+        }
+        
+        openModal(notificationModal);
+      }
+
+      leaseBtn.addEventListener('click', () => openModal(leaseModal));
+      purchaseBtn.addEventListener('click', () => openModal(purchaseModal));
+      termsLink.addEventListener('click', (e) => { e.preventDefault(); openModal(termsModal); });
+      serviceLink.addEventListener('click', (e) => { e.preventDefault(); openModal(serviceModal); });
+      
+      closeBtns.forEach(btn => btn.addEventListener('click', closeModal));
+      window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal-overlay')) closeModal();
+      });
+
+      let stage = 0;
+      const stages = [
+        { fill: '25%', text: 'Reviewing Documents' },
+        { fill: '50%', text: 'Awaiting Signature' },
+        { fill: '75%', text: 'Verifying Compliance' },
+        { fill: '100%', text: 'Contract Finalized' }
+      ];
+
+      initiateBtn.addEventListener('click', () => {
+        // Check if user is logged in
+        if (!sessionStorage.getItem('user')) {
+          showNotification('Authentication Required', 'Please sign in or create an account before initiating a fleet contract.');
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 2000);
+          return;
+        }
+
+        // Check Buyer Details
+        const bName = document.getElementById('buyerName').value;
+        const cName = document.getElementById('companyName').value;
+        const dAddr = document.getElementById('deploymentAddress').value;
+        const uQty = document.getElementById('unitQuantity').value;
+
+        if (!bName || !cName || !dAddr || !uQty) {
+          showNotification('Missing Details', 'Please complete the Deployment Configuration form (Name, Company, Address, and Fleet Size) before proceeding.');
+          return;
+        }
+
+        if (!termsCheck.checked || !serviceCheck.checked) {
+          showNotification('Required Action', 'Please review and agree to the Terms & Conditions and Service Agreement before initiating contract signing.');
+          return;
+        }
+
+        stage = (stage + 1) % stages.length;
+        progressFill.style.width = stages[stage].fill;
+        stageText.innerText = stages[stage].text;
+
+        if (stage === 3) {
+          initiateBtn.innerText = 'Contract Signed';
+          initiateBtn.style.backgroundColor = '#28a745';
+          setTimeout(() => {
+            showNotification('Order Successful', 'Fleet Contract successfully signed! Our deployment team will contact you within 24 hours for zone assessment.', true);
+          }, 800);
+        }
+      });
+    </script>
+  </body>
+</html>

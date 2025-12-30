@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="DairiX Technical Specifications - Filipino Engineering at its Finest" />
+    <title>About | DairiX</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Tesla-style Lifestyle Sections */
+      .lifestyle-section {
+        height: 100vh;
+        width: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 15vh;
+        text-align: center;
+        overflow: hidden;
+        background-color: #000;
+      }
+
+      .lifestyle-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+
+      .lifestyle-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.6;
+      }
+
+      .lifestyle-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 20px;
+        max-width: 800px;
+      }
+
+      .lifestyle-content h2 {
+        font-size: clamp(2rem, 6vw, 3.5rem);
+        font-weight: 600;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+      }
+
+      .lifestyle-content p {
+        font-size: 1.1rem;
+        color: #e0e0e0;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      /* Technical Grid Styling */
+      .tech-specs {
+        padding: 120px 0;
+        background: #000;
+      }
+
+      .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 80px;
+        margin-top: 60px;
+      }
+
+      .tech-item {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 20px;
+      }
+
+      .tech-item h4 {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.8rem;
+        color: #8e8e93;
+        margin-bottom: 15px;
+      }
+
+      .tech-item p {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #fff;
+      }
+
+      /* Production Process Section */
+      .production-section {
+        padding: 100px 0;
+        background: #050505;
+      }
+
+      .process-step {
+        margin-bottom: 40px;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .step-number {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--accent-color);
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .step-title {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+        color: #fff;
+      }
+
+      /* Inquiry Section Refinement */
+      .inquiry-section {
+        padding: 150px 0;
+        background-color: #000000;
+        position: relative;
+      }
+
+      .inquiry-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: start;
+      }
+
+      .inquiry-info h2 {
+        font-size: 3rem;
+        font-weight: 600;
+        letter-spacing: -1.5px;
+        margin-bottom: 20px;
+        color: #fff;
+      }
+
+      .inquiry-info p {
+        color: #8e8e93;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        max-width: 400px;
+      }
+
+      #inquiryForm {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+        align-items: flex-start;
+      }
+
+      .form-group.full-width {
+        grid-column: span 2;
+      }
+
+      .form-group label {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #8e8e93;
+        margin-bottom: 8px;
+        text-align: left;
+      }
+
+      .form-group input, 
+      .form-group textarea {
+        width: 100%;
+        padding: 14px 16px;
+        background-color: #111111;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: white;
+        font-family: inherit;
+        font-size: 14px;
+        text-align: left;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus, 
+      .form-group textarea:focus {
+        border-color: #fff;
+        outline: none;
+        background-color: #161616;
+      }
+
+      .btn-submit {
+        grid-column: span 2;
+        padding: 16px;
+        background-color: #fff;
+        color: #000;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: opacity 0.3s;
+        margin-top: 10px;
+      }
+
+      .btn-submit:hover {
+        opacity: 0.9;
+      }
+
+      @media (max-width: 900px) {
+        .inquiry-grid {
+          grid-template-columns: 1fr;
+          gap: 50px;
+        }
+        #inquiryForm {
+          grid-template-columns: 1fr;
+        }
+        .form-group.full-width {
+          grid-column: span 1;
+        }
+        .btn-submit {
+          grid-column: span 1;
+        }
+      }
+
+      /* Navigation Overrides */
+      .header {
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .nav-active {
+        border-bottom: 2px solid #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <img src="images/logo.png" alt="DairiX Logo" />
+        </a>
+
+        <div class="nav-right">
+          <a href="index.html" class="nav-link desktop-only">Home</a>
+          <a href="about.html" class="nav-link desktop-only nav-active">About Us</a>
+          <a href="order.html" class="nav-link desktop-only">Order</a>
+          <a href="login.html" class="nav-link desktop-only">Sign In</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero: Lifestyle Feel -->
+      <section class="lifestyle-section">
+        <div class="lifestyle-bg">
+          <img src="images/rover on street 01.png" alt="DairiX in the neighborhood">
+        </div>
+        <div class="lifestyle-content">
+          <span class="eyebrow" style="color: #fff; opacity: 0.8;">Filipino Innovation</span>
+          <h2>Beyond Distribution</h2>
+          <p>
+            DairiX is the first robotics-driven dairy service product developed in the Philippines, 
+            designed to redefine the "last mile" of fresh retail.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 1: Composition & Design -->
+      <section class="features-section">
+        <div class="container">
+          <div class="feature-row">
+            <div class="feature-text">
+              <span class="eyebrow">Advanced Composition</span>
+              <h2>Built for the Elements</h2>
+              <p>
+                Constructed from reinforced fiberglass and lightweight aluminum, the DairiX body 
+                ensures weather resistance and a long operational lifespan. Its compact, 
+                minivan-style design allows it to navigate tight community streets with ease.
+              </p>
+              <div style="margin-top: 30px; display: flex; gap: 40px;">
+                <div>
+                  <h3 style="color: #fff;">200</h3>
+                  <p style="font-size: 0.8rem; text-transform: uppercase; color: #8e8e93;">Unit Capacity</p>
+                </div>
+                <div>
+                  <h3 style="color: #fff;">12"</h3>
+                  <p style="font-size: 0.8rem; text-transform: uppercase; color: #8e8e93;">Touch Interface</p>
+                </div>
+              </div>
+            </div>
+            <div class="feature-image">
+              <img src="images/rover on street 02.png" alt="DairiX technical design" style="border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Technical Intelligence -->
+      <section class="lifestyle-section" style="height: 80vh;">
+        <div class="lifestyle-bg">
+          <img src="images/rover on street 03.png" alt="DairiX sensors and AI">
+        </div>
+        <div class="lifestyle-content">
+          <span class="eyebrow" style="color: #fff;">Autonomous Intelligence</span>
+          <h2>Precision Navigation</h2>
+          <p>
+            Using a sophisticated suite of LiDAR sensors, ultrasonic detectors, and GPS mapping, 
+            DairiX moves safely through neighborhoods, avoiding obstacles with AI-driven precision.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 3: Community Impact (The BGC Crowd Image) -->
+      <section class="features-section" style="background: #000;">
+        <div class="container">
+          <div class="feature-row reverse">
+            <div class="feature-text">
+              <span class="eyebrow">Social Experience</span>
+              <h2>Designed for People</h2>
+              <p>
+                DairiX isn't just a machine; it's a neighborhood hub. Our units bring people together, 
+                offering a modern, convenient, and social way to access fresh dairy. 
+                From busy city centers to quiet subdivisions, DairiX is part of the community fabric.
+              </p>
+            </div>
+            <div class="feature-image">
+              <img src="images/rover on street 05.png" alt="DairiX in BGC with crowd" style="border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Urban Adaptability (The Manila Street Image) -->
+      <section class="lifestyle-section" style="height: 80vh;">
+        <div class="lifestyle-bg">
+          <img src="images/rover on street 04.png" alt="DairiX in traditional Manila street">
+        </div>
+        <div class="lifestyle-content">
+          <span class="eyebrow" style="color: #fff;">Versatile Deployment</span>
+          <h2>Urban Adaptability</h2>
+          <p>
+            From modern business districts to traditional community streets, 
+            DairiX is engineered to navigate the diverse and challenging urban 
+            landscapes of the Philippines with ease and safety.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 5: Automated Retail Experience -->
+      <section class="features-section" style="background: #000; padding: 100px 0;">
+        <div class="container">
+          <div class="feature-row">
+            <div class="feature-text">
+              <span class="eyebrow">Contactless Vending</span>
+              <h2>Instant Fulfillment</h2>
+              <p>
+                Experience the convenience of automated retail. DairiX provides a seamless 
+                ordering process through its intuitive touch interface, allowing customers 
+                to select and receive fresh dairy products in seconds without manual intervention.
+              </p>
+            </div>
+            <div class="feature-image">
+              <img src="images/rover service.png" alt="People ordering from DairiX" style="border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Specifications Grid -->
+      <section class="tech-specs">
+        <div class="container">
+          <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 20px;">System Specifications</h2>
+          <p style="color: #8e8e93; text-align: center; margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Precision engineered for performance and reliability in any urban environment.
+          </p>
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>Internal Systems</h4>
+              <p>Fully refrigerated compartment maintaining -18°C for maximum freshness of milk, yogurt, and cheese.</p>
+            </div>
+            <div class="tech-item">
+              <h4>Power Management</h4>
+              <p>High-capacity Lithium-ion battery system with optional roof-mounted solar charging for extended range.</p>
+            </div>
+            <div class="tech-item">
+              <h4>Vending Logic</h4>
+              <p>Motorized dispensing system provides fast, hygienic, and automated product retrieval after purchase.</p>
+            </div>
+            <div class="tech-item">
+              <h4>Payment & Connectivity</h4>
+              <p>Supports Cash, GCash, Maya, and Digital Wallets via 4G/Wi-Fi wireless cloud connectivity.</p>
+            </div>
+            <div class="tech-item">
+              <h4>Safety Protocols</h4>
+              <p>Collision detection, emergency stop mechanisms, and 360° secured product access protocols.</p>
+            </div>
+            <div class="tech-item">
+              <h4>Philippines Made</h4>
+              <p>Engineered and assembled locally by Dairy Rover Manufacturing, supporting Filipino technical talent.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Engineering & Production Section -->
+        <div class="container">
+          <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 60px;">The Engineering Process</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+            <div class="process-step">
+              <span class="step-number">01</span>
+              <h3 class="step-title">Chassis & Base</h3>
+              <p style="color: #8e8e93; font-size: 0.9rem;">High-precision aluminum frame cutting and welding, integrated with 4 heavy-duty motors.</p>
+            </div>
+            <div class="process-step">
+              <span class="step-number">02</span>
+              <h3 class="step-title">Shell Construction</h3>
+              <p style="color: #8e8e93; font-size: 0.9rem;">Reinforced fiberglass panel molding and heat-forming for aerodynamic efficiency.</p>
+            </div>
+            <div class="process-step">
+              <span class="step-number">03</span>
+              <h3 class="step-title">Navigation Sync</h3>
+              <p style="color: #8e8e93; font-size: 0.9rem;">Installation of LiDAR, Ultrasonic sensors, and satellite-locked GPS modules.</p>
+            </div>
+            <div class="process-step">
+              <span class="step-number">04</span>
+              <h3 class="step-title">Thermal Integration</h3>
+              <p style="color: #8e8e93; font-size: 0.9rem;">Advanced mini freezer compressor and insulated chamber for precise climate control.</p>
+            </div>
+            <div class="process-step">
+              <span class="step-number">05</span>
+              <h3 class="step-title">Power Intelligence</h3>
+              <p style="color: #8e8e93; font-size: 0.9rem;">High-capacity lithium-ion battery integration with MPPT solar controllers for sustainable energy.</p>
+            </div>
+            <div class="process-step">
+              <span class="step-number">06</span>
+              <h3 class="step-title">Security Deployment</h3>
+              <p style="color: #8e8e93; font-size: 0.9rem;">360° AI-monitored cameras, motion sensors, and electronic anti-tamper locking systems.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="lifestyle-section" style="height: auto; padding: 120px 0; background: #000;">
+        <div class="lifestyle-content">
+          <h2>Experience the Future</h2>
+          <p style="color: #8e8e93; margin: 20px 0 40px;">Request a demonstration or join our neighborhood routes.</p>
+          <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+            <a href="order.html" class="btn btn-primary">Order Now</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inquiry Form -->
+      <section id="inquiry" class="inquiry-section">
+        <div class="container">
+          <div class="inquiry-grid">
+            <div class="inquiry-info">
+              <h2>Partner With Us</h2>
+              <p>Bring autonomous dairy distribution to your neighborhood or community. Our team is ready to scale with you.</p>
+            </div>
+            
+            <form id="inquiryForm">
+              <div class="form-group">
+                <label for="name">First Name</label>
+                <input type="text" id="name" required>
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" required>
+              </div>
+              <div class="form-group full-width">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+              </div>
+              <div class="form-group full-width">
+                <label for="location">Location</label>
+                <input type="text" id="location" required>
+              </div>
+              <div class="form-group full-width">
+                <label for="message">Message</label>
+                <textarea id="message" rows="4"></textarea>
+              </div>
+              <button type="submit" class="btn-submit">Submit Inquiry</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-links">
+          <a href="#">DairiX © 2025</a>
+          <a href="privacy.html">Privacy & Legal</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+      // Page specific inquiry form handling
+      const currentInquiryForm = document.getElementById('inquiryForm');
+      if (currentInquiryForm) {
+        currentInquiryForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (window.showModernModal) {
+            window.showModernModal('Inquiry Received', 'Thank you! Our engineering team will review your inquiry and contact you soon.');
+          } else {
+            alert('Thank you! Our engineering team will review your inquiry.');
+          }
+          e.target.reset();
+        });
+      }
+    </script>
+  </body>
+</html>
