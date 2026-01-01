@@ -358,10 +358,33 @@
       }
 
       .payment-icons-small img {
-        height: 18px;
+        height: 22px;
         width: auto;
         opacity: 0.8;
+        filter: brightness(1.2);
+        border-radius: 4px; /* Curved ends for icons */
+        transition: all 0.3s ease;
+      }
+
+      .payment-row:hover .payment-icons-small img {
+        opacity: 1;
         filter: brightness(1.5);
+        transform: scale(1.05);
+      }
+
+      .payment-category-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #8e8e93;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        margin-top: 15px;
+        display: block;
+      }
+
+      .payment-category-label:first-child {
+        margin-top: 0;
       }
 
       .payment-row span {
@@ -434,6 +457,13 @@
         overflow-y: auto;
         transform: translateY(20px);
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Hide scrollbar while keeping functionality */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+      }
+
+      .modal-content::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, and Opera */
       }
 
       .modal-overlay.active .modal-content {
@@ -620,8 +650,8 @@
               Charging
             </li>
             <li>
-              <strong>Features:</strong> Touchscreen ordering, cashless
-              (GCash/Maya) & cash support
+              <strong>Features:</strong> Touchscreen ordering, multi-channel
+              digital payments (GCash/Maya/Cards)
             </li>
           </ul>
         </div>
@@ -635,11 +665,19 @@
             <h3>Deployment Configuration</h3>
             <div class="deployment-grid">
               <div class="field-wrapper">
-                <label for="buyerName">Full Name</label>
+                <label for="firstName">First Name</label>
                 <input
                   type="text"
-                  id="buyerName"
-                  placeholder="Juan Dela Cruz"
+                  id="firstName"
+                  placeholder="Juan"
+                />
+              </div>
+              <div class="field-wrapper">
+                <label for="lastName">Last Name</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  placeholder="Dela Cruz"
                 />
               </div>
               <div class="field-wrapper">
@@ -712,7 +750,8 @@
           <div class="payment-options">
             <h3>Choose your payment method</h3>
             <div class="payment-selection">
-              <!-- Cards -->
+              <!-- Credit / Debit Cards -->
+              <span class="payment-category-label">Credit Card</span>
               <label class="payment-row">
                 <input type="radio" name="paymentType" value="card" />
                 <div class="payment-info">
@@ -730,6 +769,7 @@
               </label>
 
               <!-- Digital Wallets -->
+              <span class="payment-category-label">E-Wallets</span>
               <label class="payment-row">
                 <input type="radio" name="paymentType" value="ewallet" />
                 <div class="payment-info">
@@ -746,11 +786,20 @@
                       src="images/payment methods/E-wallet/maya.png"
                       alt="Maya"
                     />
+                    <img
+                      src="images/payment methods/E-wallet/amazon.png"
+                      alt="Amazon Pay"
+                    />
+                    <img
+                      src="images/payment methods/E-wallet/google pay.png"
+                      alt="Google Pay"
+                    />
                   </div>
                 </div>
               </label>
 
               <!-- Bank Transfer -->
+              <span class="payment-category-label">Bank/Debit Card</span>
               <label class="payment-row">
                 <input type="radio" name="paymentType" value="bank" />
                 <div class="payment-info">
@@ -764,33 +813,11 @@
                   </div>
                 </div>
               </label>
-
-              <!-- Cash on Delivery -->
-              <label class="payment-row">
-                <input type="radio" name="paymentType" value="cod" />
-                <div class="payment-info">
-                  <span>Cash on Delivery</span>
-                </div>
-              </label>
-
-              <!-- Other -->
-              <label class="payment-row other">
-                <input type="radio" name="paymentType" value="other" />
-                <div class="payment-info">
-                  <span>Other</span>
-                  <select id="otherPayment">
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="amazon">Amazon Pay</option>
-                    <option value="google">Google Pay</option>
-                    <option value="crypto">Cryptocurrency</option>
-                  </select>
-                </div>
-              </label>
             </div>
           </div>
 
           <button class="btn-initiate" id="initiateBtn">
-            Initiate Contract Signing
+            Proceed to Payment
           </button>
 
           <div class="checkbox-group">
@@ -1011,35 +1038,53 @@
         </h2>
         <div class="modal-body">
           <p>
-            These Terms & Conditions govern your use of the DairiX platform and
-            services provided by DairiX Manufacturing.
+            Welcome to DairiX. These Terms & Conditions ("Terms") govern your use of the DairiX website, autonomous hardware, and associated cloud services. By accessing our platform or initiating a contract, you agree to be bound by these Terms in their entirety.
           </p>
 
-          <h3>1. Acceptance of Terms</h3>
+          <h3>1. Acceptance and Eligibility</h3>
           <p>
-            By initiating a contract or using our services, you agree to be
-            bound by these terms. If you do not agree, please do not use our
-            services.
+            By using our services, you represent that you are at least 18 years of age and possess the legal authority to enter into binding agreements. If you are entering into these terms on behalf of a corporation, you represent that you have the authority to bind such entity.
           </p>
 
-          <h3>2. User Responsibilities</h3>
+          <h3>2. User Accounts and Security</h3>
           <p>
-            Users are responsible for providing accurate information and
-            maintaining the security of their account credentials. Any
-            unauthorized use of the unit or platform is strictly prohibited.
+            Users are responsible for maintaining the confidentiality of their account credentials. You agree to notify DairiX immediately of any unauthorized access. DairiX shall not be liable for losses caused by any unauthorized use of your account, whether with or without your knowledge.
           </p>
 
-          <h3>3. Intellectual Property</h3>
+          <h3>3. Proprietary Rights and Intellectual Property</h3>
           <p>
-            All content, branding, and proprietary technology associated with
-            DairiX are the exclusive property of DairiX Manufacturing.
+            All technology, including but not limited to the DairiX Autonomous Operating System (DAOS), sensor fusion algorithms, and hardware architecture, are the exclusive property of DairiX Manufacturing. Users are granted a limited, non-transferable license to use the system as intended. Reverse engineering, decompiling, or attempting to extract source code is strictly prohibited and will result in immediate termination of service and legal action.
           </p>
 
-          <h3>4. Limitation of Liability</h3>
+          <h3>4. Acceptable Use Policy</h3>
           <p>
-            DairiX shall not be liable for any indirect, incidental, or
-            consequential damages arising from the use or inability to use our
-            autonomous distribution systems.
+            The DairiX unit must be used only for its intended purpose of autonomous dairy distribution. You shall not use the system for:
+          </p>
+          <ul>
+            <li>Transportation of hazardous or illegal materials.</li>
+            <li>Operation outside of designated and approved GPS geofences.</li>
+            <li>Modification of safety sensors or autonomous override systems.</li>
+            <li>Any activity that violates local traffic or distribution laws.</li>
+          </ul>
+
+          <h3>5. Limitation of Liability</h3>
+          <p>
+            To the maximum extent permitted by law, DairiX shall not be liable for any indirect, incidental, special, or consequential damages, including loss of profits, data, or use. Our total liability for any claim arising under these terms shall not exceed the amount paid for the service in the six months preceding the claim.
+          </p>
+
+          <h3>6. Indemnification</h3>
+          <p>
+            You agree to indemnify and hold harmless DairiX, its officers, and employees from any claims, damages, or expenses arising from your misuse of the autonomous system, violation of these terms, or infringement of any third-party rights.
+          </p>
+
+          <h3>7. Modifications to Terms</h3>
+          <p>
+            DairiX reserves the right to modify these Terms at any time. Significant changes will be communicated via the dashboard. Continued use of the service after such modifications constitutes acceptance of the new Terms.
+          </p>
+
+          <h3>8. Governing Law</h3>
+          <p>
+            These Terms shall be governed by and construed in accordance with the laws of the Republic of the Philippines. Any disputes shall be resolved exclusively in the courts of Taguig City, Metro Manila.
           </p>
         </div>
       </div>
@@ -1060,36 +1105,92 @@
         </h2>
         <div class="modal-body">
           <p>
-            This Service Agreement defines the operational support provided for
-            DairiX Autonomous Units.
+            This Service Agreement ("SLA") defines the operational support, maintenance protocols, and uptime guarantees provided for DairiX Autonomous Units.
           </p>
 
-          <h3>1. Scope of Service</h3>
+          <h3>1. Scope of Autonomous Support</h3>
           <p>
-            Service includes remote monitoring, autonomous navigation support,
-            and technical maintenance as defined in the technical manual.
+            DairiX provides continuous background support for all active fleet units, including:
+          </p>
+          <ul>
+            <li><strong>Remote Situational Awareness:</strong> 24/7 monitoring of vehicle health and navigation status.</li>
+            <li><strong>OTA Updates:</strong> Periodic software patches to improve navigation logic and safety protocols.</li>
+            <li><strong>Cloud Dashboard:</strong> Access to real-time sales data, inventory levels, and battery telemetry.</li>
+          </ul>
+
+          <h3>2. Maintenance and Repair Protocols</h3>
+          <p>
+            To ensure public safety and operational efficiency, the following maintenance schedule is mandatory:
+          </p>
+          <ul>
+            <li><strong>Tier 1 (Daily):</strong> Customer is responsible for cleaning sensors (LiDAR/Cameras) and hygiene of the vending slot.</li>
+            <li><strong>Tier 2 (Quarterly):</strong> DairiX technicians will perform deep diagnostics on motor controllers and refrigeration seals.</li>
+            <li><strong>Tier 3 (Annual):</strong> Full hardware overhaul, including battery stress testing and structural integrity checks.</li>
+          </ul>
+
+          <h3>3. Uptime Guarantee and SLAs</h3>
+          <p>
+            DairiX aims for a 98% operational uptime. In the event of a critical hardware failure (Class A), DairiX commits to a 4-hour response time for remote diagnostics and a 24-hour on-site repair window within primary service zones.
           </p>
 
-          <h3>2. Maintenance Schedule</h3>
+          <h3>4. Connectivity and Network Requirements</h3>
           <p>
-            Regular preventive maintenance will be performed every 3,000
-            operational hours or 6 months, whichever comes first.
+            The unit requires a persistent 4G/5G or high-speed Wi-Fi connection. While the unit has offline safety failsafes, autonomous distribution may be limited or paused if signal strength drops below -110 dBm. DairiX is not responsible for localized network outages.
           </p>
 
-          <h3>3. Connectivity Requirements</h3>
+          <h3>5. Battery and Energy Management</h3>
           <p>
-            The unit requires a persistent 4G/LTE or Wi-Fi connection for
-            autonomous operation and real-time sales reporting. DairiX is not
-            responsible for service interruptions caused by local network
-            failures.
+            Users must ensure the unit is returned to its docking station when battery levels reach 15%. Allowing the battery to fully deplete (0%) multiple times may damage the Lithium-ion cells and void the power system warranty.
           </p>
 
-          <h3>4. Customer Support</h3>
+          <h3>6. Support Channels</h3>
           <p>
-            Technical support is available 24/7 via the central dashboard or
-            designated emergency contact channels.
+            Emergency support is available via:
+          </p>
+          <ul>
+            <li>In-app "SOS" signal from the fleet dashboard.</li>
+            <li>Dedicated technical hotline for Enterprise clients.</li>
+            <li>Email support for non-critical configuration changes.</li>
+          </ul>
+
+          <h3>7. Force Majeure</h3>
+          <p>
+            DairiX shall not be liable for failure to perform its obligations under this agreement if such failure results from acts of God, extreme weather conditions (Typhoons), or governmental restrictions on autonomous vehicle operation.
           </p>
         </div>
+      </div>
+    </div>
+
+    <!-- Payment Credential Modal -->
+    <div class="modal-overlay" id="paymentCredentialModal">
+      <div
+        class="modal-content"
+        style="max-width: 450px; text-align: left; padding: 40px"
+      >
+        <button class="modal-close" id="paymentModalClose">&times;</button>
+        <h2
+          id="paymentModalTitle"
+          style="
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+          "
+        >
+          Payment Details
+        </h2>
+        <div id="paymentFormContainer" class="deployment-grid" style="display: grid; gap: 20px;">
+          <!-- Content injected via JS based on selection -->
+        </div>
+        <button
+          class="btn-initiate"
+          id="confirmPaymentBtn"
+          style="margin-top: 30px; margin-bottom: 0; width: 100%"
+        >
+          Confirm & Sign Contract
+        </button>
       </div>
     </div>
 
@@ -1164,6 +1265,11 @@
       const serviceModal = document.getElementById("serviceModal");
 
       const notificationModal = document.getElementById("notificationModal");
+      const paymentCredentialModal = document.getElementById("paymentCredentialModal");
+      const paymentFormContainer = document.getElementById("paymentFormContainer");
+      const paymentModalTitle = document.getElementById("paymentModalTitle");
+      const confirmPaymentBtn = document.getElementById("confirmPaymentBtn");
+
       const notifTitle = document.getElementById("notifTitle");
       const notifMessage = document.getElementById("notifMessage");
       const notifClose = document.getElementById("notifClose");
@@ -1249,7 +1355,8 @@
         }
 
         // Check Buyer Details
-        const bName = document.getElementById("buyerName").value;
+        const fName = document.getElementById("firstName").value;
+        const lName = document.getElementById("lastName").value;
         const cName = document.getElementById("companyName").value;
         const dAddr = document.getElementById("deploymentAddress").value;
         const uQty = document.getElementById("unitQuantity").value;
@@ -1260,7 +1367,8 @@
         );
 
         if (
-          !bName ||
+          !fName ||
+          !lName ||
           !cName ||
           !dAddr ||
           !uQty ||
@@ -1287,17 +1395,104 @@
         progressFill.style.width = stages[stage].fill;
         stageText.innerText = stages[stage].text;
 
-        if (stage === 3) {
-          initiateBtn.innerText = "Contract Signed";
-          initiateBtn.style.backgroundColor = "#28a745";
-          setTimeout(() => {
-            showNotification(
-              "Order Successful",
-              "Fleet Contract successfully signed! Our deployment team will contact you within 24 hours for zone assessment.",
-              true
-            );
-          }, 800);
+        // Open Payment Credential Modal
+        const selectedPayment = paymentType.value;
+        setupPaymentForm(selectedPayment);
+        openModal(paymentCredentialModal);
+      });
+
+      function setupPaymentForm(type) {
+        paymentFormContainer.innerHTML = "";
+        let html = "";
+
+        if (type === "card") {
+          paymentModalTitle.innerText = "Credit / Debit Card";
+          html = `
+            <div class="field-wrapper full">
+              <label>Cardholder Name</label>
+              <input type="text" placeholder="Full Name on Card" id="pay_name">
+            </div>
+            <div class="field-wrapper full">
+              <label>Card Number</label>
+              <input type="text" placeholder="0000 0000 0000 0000" id="pay_number">
+            </div>
+            <div class="field-wrapper">
+              <label>Expiry Date</label>
+              <input type="text" placeholder="MM/YY" id="pay_expiry">
+            </div>
+            <div class="field-wrapper">
+              <label>CVV</label>
+              <input type="password" placeholder="***" id="pay_cvv">
+            </div>
+          `;
+        } else if (type === "ewallet") {
+          paymentModalTitle.innerText = "Digital Wallet Login";
+          html = `
+            <div class="field-wrapper full">
+              <label>Account Number / Phone</label>
+              <input type="text" placeholder="09XX XXX XXXX" id="pay_account">
+            </div>
+            <div class="field-wrapper full">
+              <label>Account PIN / Password</label>
+              <input type="password" placeholder="Enter your credentials" id="pay_pass">
+            </div>
+          `;
+        } else if (type === "bank") {
+          paymentModalTitle.innerText = "Bank Portal Access";
+          html = `
+            <div class="field-wrapper full">
+              <label>Select Your Bank</label>
+              <select id="pay_bank_select">
+                <option value="bdo">BDO Unibank</option>
+                <option value="bpi">BPI</option>
+                <option value="ub">UnionBank</option>
+              </select>
+            </div>
+            <div class="field-wrapper full">
+              <label>Online Banking Username</label>
+              <input type="text" placeholder="Username" id="pay_user">
+            </div>
+            <div class="field-wrapper full">
+              <label>Password</label>
+              <input type="password" placeholder="********" id="pay_pass">
+            </div>
+          `;
         }
+
+        paymentFormContainer.innerHTML = html;
+      }
+
+      confirmPaymentBtn.addEventListener("click", () => {
+        // Simple validation for payment modal
+        const inputs = paymentFormContainer.querySelectorAll("input");
+        let allFilled = true;
+        inputs.forEach(input => {
+          if (!input.value) allFilled = false;
+        });
+
+        if (!allFilled) {
+          alert("Please fill in all payment credentials to continue.");
+          return;
+        }
+
+        closeModal();
+        
+        // Finalize contract
+        stage = 3;
+        progressFill.style.width = stages[stage].fill;
+        stageText.innerText = stages[stage].text;
+        
+        const initiateBtn = document.getElementById("initiateBtn");
+        initiateBtn.innerText = "Contract Finalized";
+        initiateBtn.style.backgroundColor = "#28a745";
+        
+        setTimeout(() => {
+          showNotification(
+            "Order Successful",
+            "Fleet Contract successfully signed and payment authorized! Our deployment team will contact you within 24 hours for zone assessment.",
+            true
+          );
+        }, 800);
       });
     </script>
   </body>

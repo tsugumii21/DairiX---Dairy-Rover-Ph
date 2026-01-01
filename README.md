@@ -35,17 +35,26 @@
 - **Ephemeral Sessions:** Experience a "Simulation Mode" where account data and login states are session-based (clears automatically on page refresh).
 - **Interactive Dashboards:** Dynamic user status indicators with professional sign-out confirmation flows.
 
-### 📜 Fleet Contract Portal (B2B)
+### 💳 Advanced Payment Ecosystem
 
-- **Deployment Configuration:** Professional form for buyers to input organization details and target deployment zones.
-- **Dynamic Fleet Selection:** Choose from Single Units (Pilot), Starter Fleets, or Enterprise-level deployments.
-- **Legal-Grade Documentation:** Integrated "Master Lease Agreement" and "Asset Purchase Agreement" pop-outs with professional legal terminology.
+- **Categorized Selections:** Payments organized by Credit Card, E-Wallets (GCash/Maya/PayPal/Amazon/Google), and Bank/Debit Cards.
+- **Dynamic Credentialing:** Custom pop-up system that requests specific credentials (CVV, Account PINs, Bank Usernames) based on the selected payment channel.
+- **Modern UI Styling:** Curved icon aesthetics with interactive hover states and global scrollbar-free design for a seamless "App-like" experience.
 
 ### 🔬 Technical Showcase
 
+- **DairiX Technical Blueprint:** Added a high-fidelity schematic layout of the vehicle architecture.
 - **Engineering Process:** A 6-step breakdown of the rover's manufacturing, from chassis welding to AI sensor integration.
 - **System Specifications:** Detailed data on LiDAR sensor fusion, 12hr Lithium-ion battery life, and deep-freeze climate control (-18°C).
 - **Urban Adaptability:** Visual showcase of the Filipino-engineered rovers navigating diverse Manila landscapes.
+
+### 📜 Fleet Contract Portal (B2B)
+
+- **Enhanced Form Fields:** Split full name into First/Last name fields with integrated grid alignment.
+- **Detailed Legal Framework:** Expanded "Terms & Conditions" and "Service Agreements" with professional SLAs, Force Majeure clauses, and governing law sections.
+- **Deployment Configuration:** Professional form for buyers to input organization details and target deployment zones.
+- **Dynamic Fleet Selection:** Choose from Single Units (Pilot), Starter Fleets, or Enterprise-level deployments.
+- **Legal-Grade Documentation:** Integrated "Master Lease Agreement" and "Asset Purchase Agreement" pop-outs with professional legal terminology.
 
 ### 🎨 Premium UI/UX
 
